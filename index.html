@@ -1,11 +1,14 @@
-## Olivia Provance
+---
+layout: default
+---
 
-Hi there! I’m Olivia, a PhD candidate in the department of cancer biology working in the lab of [Dr. Joan Lewis-Wambi] (http://www.kumc.edu/school-of-medicine/cancer-biology/faculty/joan-lewis-wambi-phd.html) at the University of Kansas Medical Center.
-<p>
-My dissertation is focused on defining the role of interferon stimulated factors in triple-negative breast cancer. I run gels to answer scientific questions and run marathons to keep myself sane.
-<p>
-Here you will find a mix of academic achievements, pictures of my dog, and marathon motivation.
-<p>
-Thanks for visiting!
-<p>
-Liv
+<small>{{ page.date | date: "%-d %B %Y" }}</small>
+<h1>{{ page.title }}</h1>
+
+<p class="view">by {{ page.author | default: site.author }}</p>
+
+{{content}}
+
+{% if page.tags %}
+  <small>tags: <em>{{ page.tags | join: "</em> - <em>" }}</em></small>
+{% endif %}
