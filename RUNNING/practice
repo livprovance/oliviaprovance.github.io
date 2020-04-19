@@ -392,6 +392,32 @@ summary {
 </div>
 
 
+  <!-- First Photo Grid-->
+  <div class="w3-row-padding w3-padding-16 w3-center" id="RUNNING">
+    <div class="w3-quarter">
+      <img src="KCM_2019" alt="KCM_2019" style="width:100%">
+      <h3>2019 Kansas City Marathon</h3>
+      <p>Distance: 26.2</p>
+      <p>Time: 3h 24min</p>
+    </div>
+    <div class="w3-quarter">
+      <img src="HH_2019.pmg" alt="HH 2019" style="width:100%">
+      <h3>2019 Hospital Hill Run</h3>
+      <p>Distance: 13.1</p>
+      <p>Time: 2hr 8min</p>
+    </div>
+    <div class="w3-quarter">
+      <img src="/w3images/cherries.jpg" alt="Cherries" style="width:100%">
+      <h3>Cherries, interrupted</h3>
+      <p>Lorem ipsum text praesent tincidunt ipsum lipsum.</p>
+      <p>What else?</p>
+    </div>
+    <div class="w3-quarter">
+      <img src="/w3images/wine.jpg" alt="Pasta and Wine" style="width:100%">
+      <h3>Once Again, Robust Wine and Vegetable Pasta</h3>
+      <p>Lorem ipsum text praesent tincidunt ipsum lipsum.</p>
+    </div>
+  </div>
 <html>
 <head>
 <style>
