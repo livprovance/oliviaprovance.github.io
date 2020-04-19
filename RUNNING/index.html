@@ -390,83 +390,209 @@ summary {
   
 
 </div>
-
-<!DOCTYPE html>
+  
+  <!doctype html>
 <html>
 <head>
-<style>
-div.gallery {
-  margin: 15px;
-  border: 1.5px solid #000;
-  float: left;
-  width: 180px;
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <style>
+body {
+  background-color: #cccccc;
+  color: #333333;
 }
-
-div.gallery:hover {
-  opacity: 0.5;
+.masonry-wrapper {
+  padding: 1.5em;
+  max-width: 960px;
+  margin-right: auto;
+  margin-left: auto;
 }
-
-div.gallery img {
-  width: auto;
-  height: auto;
-  border-radius: 8px;
-  box-shadow: 0 0 16px #333;
-  transition: all 1.5s ease;
+.masonry {
+  display: grid;
+  grid-template-columns: repeat(1, minmax(100px,1fr));
+  grid-gap: 10px;
+  grid-auto-rows: 0;
 }
-
-div.desc {
-  padding: 10px;
-  text-align: center;
-  font-family: Arial, Helvetica, sans-serif;
-  font-size: 12px;
+@media only screen and (max-width: 1023px) and (min-width: 768px) {
+  .masonry {
+    grid-template-columns: repeat(2, minmax(100px,1fr));
+  }
 }
-</style>
+@media only screen and (min-width: 1024px) {
+  .masonry {
+    grid-template-columns: repeat(4, minmax(100px,1fr));
+  }
+}
+.masonry-item, .masonry-content {
+  border-radius: 4px;
+  overflow: hidden;
+}
+.masonry-content {
+  overflow: hidden;
+}
+.masonry-item {
+  color: #111111;
+  background-color: #f9f9f9;
+}
+.masonry-title, .masonry-description {
+  margin: 0;
+}
+.masonry-title {
+  font-weight: 700;
+  font-size: 1.1rem;
+  padding: 1rem 1.5rem;
+}
+.masonry-description {
+  padding: 1.5rem;
+  font-size: .75rem;
+  border-top: 1px solid rgba(0, 0, 0, .05);
+}
+  </style>
 </head>
 <body>
+  <div class="masonry-wrapper"><div class="masonry">
+  <div class="masonry-item">
+    <div class="masonry-content">
+      <img src="KCM_2019.png" alt="KCM_2019">
+      <h3 class="masonry-title">2019 Kansas City Marathon a</h3>
+      <p class="masonry-description">Distance: 26.2mi</p>
+      <p class="masonry-description">Time: 3h 24min</p>
+    </div>
+  </div>
+  <div class="masonry-item">
+    <div class="masonry-content">
+      <img src="PLAZA_2019.png" alt="PLAZA_2019">
+      <h3 class="masonry-title">2019 Plaza 10k</h3>
+      <p class="masonry-description"> Distance: 10k</p>
+      <p class="masonry-description"> Time: 7:20/mi</p>
+  </div>
+  <div class="masonry-item">
+    <div class="masonry-content">
+      <img src="HH_2019.png" alt="HH_2019">
+      <h3 class="masonry-title">2019 Hospital Hill Run</h3>
+      <p class="masonry-description"> Distance: 13.1mi</p>
+      <p class="masonry-description"> Time: 2h 8min</p>
+  </div>
+  <div class="masonry-item">
+    <div class="masonry-content">
+      <img src="KCM 2018.png" alt="KCM_2018">
+      <h3 class="masonry-title">2018 Kansas City Marathon</h3>
+      <p class="masonry-description">Distance: 26.2mi</p>
+      <p class="masonry-description">Time: 3h 46min</p>
+    </div>
+  </div>
+  <div class="masonry-item">
+    <div class="masonry-content">
+      <img src="HH_2018.png" alt="HH_2018">
+      <h3 class="masonry-title">2018 Hospital Hill Run</h3>
+      <p class="masonry-description">Distance: 13.1mi</p>
+      <p class="masonry-description">Time: 1h 40min</p>
+      <p class="masonry-description">Placement: 1/68 F 25-29 </p>
+    </div>
+  </div>
+  <div class="masonry-item">
+    <div class="masonry-content">
+      <img src="HH_2017.png" alt="HH_2017">
+      <h3 class="masonry-title">2017 Hospital Hill Run</h3>
+      <p class="masonry-description">Distance: 13.1mi</p>
+    </div>
+  </div>
+</div>  <script src="//unpkg.com/imagesloaded@4/imagesloaded.pkgd.min.js"></script>
+  <script>
+/**
+ * Set appropriate spanning to any masonry item
+ *
+ * Get different properties we already set for the masonry, calculate 
+ * height or spanning for any cell of the masonry grid based on its 
+ * content-wrapper's height, the (row) gap of the grid, and the size 
+ * of the implicit row tracks.
+ *
+ * @param item Object A brick/tile/cell inside the masonry
+ * @link https://w3bits.com/css-grid-masonry/
+ */
+function resizeMasonryItem(item){
+  /* Get the grid object, its row-gap, and the size of its implicit rows */
+  var grid = document.getElementsByClassName('masonry')[0];
+  if( grid ) {
+    var rowGap = parseInt(window.getComputedStyle(grid).getPropertyValue('grid-row-gap')),
+        rowHeight = parseInt(window.getComputedStyle(grid).getPropertyValue('grid-auto-rows')),
+        gridImagesAsContent = item.querySelector('img.masonry-content');
 
-<div class="gallery">
-  <a target="_blank" href="KCM_2019.png">
-    <img src="KCM_2019.png" alt="KCM_2019" width="600" height="400">
-  </a>
-  <div class="desc">2019 Kansas City Marathon </div>
-</div>
+    /*
+     * Spanning for any brick = S
+     * Grid's row-gap = G
+     * Size of grid's implicitly create row-track = R
+     * Height of item content = H
+     * Net height of the item = H1 = H + G
+     * Net height of the implicit row-track = T = G + R
+     * S = H1 / T
+     */
+    var rowSpan = Math.ceil((item.querySelector('.masonry-content').getBoundingClientRect().height+rowGap)/(rowHeight+rowGap));
 
-<div class="gallery">
-  <a target="_blank" href="PLAZA_2019.png">
-    <img src="PLAZA_2019.png" alt="PLAZA_2019" width="600" height="400">
-  </a>
-  <div class="desc">2019 Plaza 10k</div>
-</div>
-  
-<div class="gallery">
-  <a target="_blank" href="HH_2019.png">
-    <img src="HH_2019.png" alt="HH_2019" width="600" height="400">
-  </a>
-  <div class="desc">2019 Hospital Hill Run</div>
-</div>
-  
- <div class="gallery">
-  <a target="_blank" href="KCM 2018.png">
-    <img src="KCM 2018.png" alt="KCM_2018" width="600" height="400">
-  </a>
-  <div class="desc">2018 Kansas City Marathon</div>
-</div>
+    /* Set the spanning as calculated above (S) */
+    item.style.gridRowEnd = 'span '+rowSpan;
+    if(gridImagesAsContent) {
+      item.querySelector('img.masonry-content').style.height = item.getBoundingClientRect().height + "px";
+    }
+  }
+}
 
- <div class="gallery">
-  <a target="_blank" href="HH_2018.png">
-    <img src="HH_2018.png" alt="HH_2018" width="600" height="400">
-  </a>
-  <div class="desc">2018 Hospital Hill Run</div>
-</div>
-  
- <div class="gallery">
-  <a target="_blank" href="HH_2017.png">
-    <img src="HH_2017.png" alt="HH_2017" width="600" height="400">
-  </a>
-  <div class="desc">2017 Hospital Hill Run</div>
-</div>
-  
+/**
+ * Apply spanning to all the masonry items
+ *
+ * Loop through all the items and apply the spanning to them using 
+ * `resizeMasonryItem()` function.
+ *
+ * @uses resizeMasonryItem
+ * @link https://w3bits.com/css-grid-masonry/
+ */
+function resizeAllMasonryItems(){
+  // Get all item class objects in one list
+  var allItems = document.querySelectorAll('.masonry-item');
+
+  /*
+   * Loop through the above list and execute the spanning function to
+   * each list-item (i.e. each masonry item)
+   */
+  if( allItems ) {
+    for(var i=0;i>allItems.length;i++){
+      resizeMasonryItem(allItems[i]);
+    }
+  }
+}
+
+/**
+ * Resize the items when all the images inside the masonry grid 
+ * finish loading. This will ensure that all the content inside our
+ * masonry items is visible.
+ *
+ * @uses ImagesLoaded
+ * @uses resizeMasonryItem
+ * @link https://w3bits.com/css-grid-masonry/
+ */
+function waitForImages() {
+  //var grid = document.getElementById("masonry");
+  var allItems = document.querySelectorAll('.masonry-item');
+  if( allItems ) {
+    for(var i=0;i<allItems.length;i++){
+      imagesLoaded( allItems[i], function(instance) {
+        var item = instance.elements[0];
+        resizeMasonryItem(item);
+        console.log("Waiting for Images");
+      } );
+    }
+  }
+}
+
+/* Resize all the grid items on the load and resize events */
+var masonryEvents = ['load', 'resize'];
+masonryEvents.forEach( function(event) {
+  window.addEventListener(event, resizeAllMasonryItems);
+} );
+
+/* Do a resize once more when all the images finish loading */
+waitForImages();  
+</script>
 </body>
 </html>
-
 
